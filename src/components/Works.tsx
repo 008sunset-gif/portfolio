@@ -50,7 +50,7 @@ export default function Works() {
           <WorkRow
             work={EVOWALKER}
             media={<EvoWalkerMini />}
-            mediaCaption="FIG.02·A — LIVE SIMULATION / 同一エンジン"
+            mediaCaption="FIG.02·A — LIVE SIMULATION"
           />
           <WorkRow
             work={PAPER_SURVEY}

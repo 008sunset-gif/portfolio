@@ -13,9 +13,9 @@ export default function About() {
 
         <div className="about__body" data-reveal-group>
           <p className="about__lead" data-reveal lang="ja">
-            個人開発で、生成AIエージェントとリアルタイム3Dの2軸でアプリを作っている。
-            共通して関心があるのは「AIの内部で何が起きているか(試行錯誤・学習の過程)を、
-            人が直感的に観察でき、再利用できる形に落とすこと」。
+            生成AIエージェントとリアルタイム3Dの2分野で、個人でアプリを開発しています。
+            AIの内部処理や学習の過程を、人が見て理解できる形にすることに取り組んでいます。
+            作ったものは下の「Selected Works」にまとめ、コードはGitHubで公開しています。
           </p>
           <p className="about__affil mono" data-reveal lang="ja">
             所属: 東京電機大学大学院 システムデザイン工学研究科 デザイン工学専攻

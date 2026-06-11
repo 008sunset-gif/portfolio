@@ -2,14 +2,13 @@ import { useEffect, useRef, useState } from 'react'
 import gsap from 'gsap'
 import Hero3DScene from '../three/Hero3DScene'
 import EvoWalkerCanvas from './EvoWalkerCanvas'
-import MeasurementPanel from './MeasurementPanel'
 import Preloader from './Preloader'
 import useDeviceTier from '../hooks/useDeviceTier'
 
-// ヒーローの一言。詩ではなく「何をする人か」を一目で伝える短いコピー。
+// 1ページ目の自己紹介。事実を簡潔に伝える文体（ポエム調にしない）。
 const DECLARATION = [
-  '生成AIエージェントとリアルタイム3Dの、個人アプリ開発者です。',
-  'AIや設計の「試行錯誤」を、目に見える形にするのが好きです。',
+  '生成AIエージェントとリアルタイム3Dを使った、個人アプリ開発をしています。',
+  '制作した2つのアプリを下にまとめました。コードはGitHubで公開しています。',
 ]
 
 export default function Hero() {
@@ -44,10 +43,13 @@ export default function Hero() {
       </div>
 
       <div className="container hero__inner">
-        <p className="hero__eyebrow mono">FIG.00 — PROFILE / AI × 3D 開発</p>
+        <p className="hero__eyebrow mono">FIG.00 — PROFILE / 自己紹介</p>
         <h1 className="hero__name mono">
           大場 祐飛 <span className="hero__name-en">/ Yuhi Oba</span>
         </h1>
+        <p className="hero__affil mono" lang="ja">
+          東京電機大学大学院 システムデザイン工学研究科 デザイン工学専攻
+        </p>
 
         <p className="hero__declaration" lang="ja" ref={declRef}>
           {DECLARATION.map((line) => (
@@ -71,8 +73,6 @@ export default function Hero() {
           </a>
         </div>
       </div>
-
-      {tier.mode === '3d' && <MeasurementPanel />}
     </header>
   )
 }

@@ -116,7 +116,7 @@ body::-webkit-scrollbar-thumb {
   font-weight: 700;
   font-size: clamp(7rem, 22vw, 20rem);
   line-height: 0.8;
-  color: rgba(255, 255, 255, 0.075);
+  color: rgba(255, 255, 255, 0.12);
   letter-spacing: -0.03em;
   pointer-events: none;
   user-select: none;
