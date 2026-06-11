@@ -5,7 +5,6 @@ export type Work = {
   title: string
   oneLiner: string
   description: string
-  voice: string // 一人称の一言（原文）
   tech: string[]
   live?: string
   code: string
@@ -20,7 +19,8 @@ type Props = {
 
 /**
  * One work as a large editorial block: a framed instrument "viewport" on one
- * side, the write-up on the other. Alternates sides via `reverse`.
+ * side, the write-up on the other. Alternates sides via `reverse`. The links
+ * are explicit buttons so it's obvious where each one goes.
  */
 export default function WorkRow({ work, media, mediaCaption, reverse = false }: Props) {
   return (
@@ -47,24 +47,28 @@ export default function WorkRow({ work, media, mediaCaption, reverse = false }: 
         <p className="work__desc" data-reveal lang="ja">
           {work.description}
         </p>
-        <blockquote className="work__voice" data-reveal lang="ja">
-          {work.voice}
-        </blockquote>
-        <ul className="work__tech" data-reveal aria-label="技術スタック">
+        <ul className="work__tech" data-reveal aria-label="使用技術">
           {work.tech.map((t) => (
             <li className="work__tag mono" key={t}>
               {t}
             </li>
           ))}
         </ul>
-        <div className="work__links mono" data-reveal>
+        <div className="work__links" data-reveal>
           {work.live && (
-            <a href={work.live} target="_blank" rel="noopener noreferrer" className="work__link work__link--live">
-              Live ↗
+            <a
+              href={work.live}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="work__cta work__cta--live"
+            >
+              <span aria-hidden="true">▶</span> デモを見る
+              <span className="work__cta-sub mono">Live</span>
             </a>
           )}
-          <a href={work.code} target="_blank" rel="noopener noreferrer" className="work__link">
-            Code ↗
+          <a href={work.code} target="_blank" rel="noopener noreferrer" className="work__cta">
+            <span aria-hidden="true">{'</>'}</span> コードを見る
+            <span className="work__cta-sub mono">GitHub</span>
           </a>
         </div>
       </div>

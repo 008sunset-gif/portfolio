@@ -37,3 +37,6 @@ vite.config.d.ts
 
 # Vercel
 .vercel
+
+# Reference material (design references — not shipped or deployed)
+references/

@@ -135,29 +135,32 @@ body.is-loading {
   font-size: 0.52em;
   font-weight: 500;
 }
-.hero__affil {
-  font-size: clamp(0.76rem, 1.4vw, 0.92rem);
-  letter-spacing: 0.04em;
-  line-height: 1.7;
-  color: var(--fg-dim);
-  margin-bottom: 2rem;
-  max-width: 46ch;
-}
-
-.hero__declaration {
+.hero__profile {
   display: flex;
   flex-direction: column;
-  gap: 0.55rem;
-  font-weight: 400;
-  margin-bottom: 3rem;
-  max-width: 42ch;
+  gap: 0.85rem;
+  margin-bottom: 2.6rem;
+  max-width: 50ch;
 }
-.hero__line {
-  display: block;
-  font-size: clamp(1rem, 1.9vw, 1.3rem);
-  line-height: 1.85;
-  letter-spacing: 0.02em;
-  text-shadow: 0 2px 30px rgba(10, 12, 17, 0.9);
+.hero__prow {
+  display: grid;
+  grid-template-columns: 3.4rem 1fr;
+  gap: 0.9rem;
+  align-items: baseline;
+}
+.hero__pkey {
+  font-size: 0.66rem;
+  letter-spacing: 0.18em;
+  color: var(--accent);
+  padding-top: 0.15rem;
+  border-left: 2px solid var(--accent-dim);
+  padding-left: 0.6rem;
+}
+.hero__pval {
+  font-size: clamp(0.86rem, 1.4vw, 1rem);
+  line-height: 1.6;
+  color: var(--fg);
+  text-shadow: 0 2px 24px rgba(10, 12, 17, 0.9);
 }
 
 .hero__actions {
@@ -217,15 +220,14 @@ body.is-loading {
   font-size: clamp(1.1rem, 2vw, 1.5rem);
   line-height: 2.05;
   font-weight: 300;
-  max-width: 40ch;
+  max-width: 42ch;
 }
-.about__affil {
-  margin-top: 2rem;
-  font-size: 0.84rem;
+.about__sub {
+  margin-top: 1.6rem;
+  font-size: clamp(0.92rem, 1.5vw, 1.05rem);
+  line-height: 1.95;
   color: var(--fg-dim);
-  padding: 0.7rem 1rem;
-  border-left: 2px solid var(--accent);
-  background: var(--bg-soft);
+  max-width: 42ch;
 }
 
 /* ============================================================
@@ -346,15 +348,6 @@ body.is-loading {
   color: var(--fg-dim);
   margin-bottom: 1.5rem;
 }
-.work__voice {
-  font-size: 0.95rem;
-  line-height: 1.9;
-  color: var(--fg);
-  padding: 1rem 1.2rem;
-  margin-bottom: 1.6rem;
-  border-left: 2px solid var(--accent);
-  background: linear-gradient(180deg, rgba(94, 234, 212, 0.06), transparent);
-}
 .work__tech {
   list-style: none;
   display: flex;
@@ -372,26 +365,58 @@ body.is-loading {
 }
 .work__links {
   display: flex;
-  gap: 1.4rem;
+  flex-wrap: wrap;
+  gap: 0.9rem;
 }
-.work__link {
-  font-size: 0.85rem;
-  color: var(--fg-dim);
-  border-bottom: 1px solid transparent;
-  padding-bottom: 2px;
-  transition: color 0.2s ease, border-color 0.2s ease;
+.work__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.7rem 1.15rem;
+  border-radius: 5px;
+  border: 1px solid var(--border);
+  background: var(--bg-soft);
+  color: var(--fg);
+  font-size: 0.9rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  transition: transform 0.2s var(--ease), border-color 0.2s ease, background 0.2s ease,
+    color 0.2s ease;
 }
-.work__link:hover {
-  color: var(--accent);
+.work__cta:hover {
+  transform: translateY(-2px);
   border-color: var(--accent);
 }
-.work__link--live {
+.work__cta-sub {
+  font-size: 0.66rem;
+  letter-spacing: 0.14em;
+  color: var(--fg-faint);
+  padding-left: 0.5rem;
+  margin-left: 0.1rem;
+  border-left: 1px solid var(--border);
+}
+.work__cta:hover .work__cta-sub {
   color: var(--accent);
+}
+/* the primary action (live demo) reads as the filled button */
+.work__cta--live {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #06281f;
+}
+.work__cta--live .work__cta-sub {
+  color: #0a4a3c;
+  border-left-color: rgba(6, 40, 31, 0.3);
+}
+.work__cta--live:hover {
+  background: #7cf3df;
+}
+.work__cta--live:hover .work__cta-sub {
+  color: #0a4a3c;
 }
 
 /* ============================================================
-   AGENT FLOW (Paper Survey pipeline) — Planner -> Collector ->
-   Evaluator -> Synthesizer -> Verifier -> Reporter
+   AGENT FLOW — Paper Survey pipeline as a labelled stepper
    ============================================================ */
 .agentflow {
   position: absolute;
@@ -399,164 +424,127 @@ body.is-loading {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 1.5rem;
+  /* extra bottom padding shifts the centred stepper up, clear of the caption */
+  padding: 1rem 1rem 2.2rem;
 }
-.agentflow__svg {
+.pipeline {
+  list-style: none;
   width: 100%;
-  max-width: 210px;
-  height: auto;
-  overflow: visible;
+  max-width: 310px;
+  display: flex;
+  flex-direction: column;
 }
-.agentflow__track {
-  stroke: var(--border);
-  stroke-width: 2;
+.pipeline__step {
+  position: relative;
+  display: grid;
+  grid-template-columns: 24px 1fr;
+  gap: 0.8rem;
+  align-items: center;
+  min-height: 38px;
+  padding: 0.16rem 0;
 }
-.agentflow__pulse {
-  stroke: var(--accent);
-  stroke-width: 2;
-  stroke-dasharray: 34;
-  stroke-dashoffset: 34;
-  animation: flowSeg 6s linear infinite;
+/* faint static connector from this dot's centre to the next */
+.pipeline__step:not(:last-child)::before {
+  content: '';
+  position: absolute;
+  left: 11px;
+  top: 50%;
+  height: 100%;
+  width: 2px;
+  background: var(--border);
+  z-index: 0;
 }
-.agentflow__pulse--1 {
-  animation-delay: 0.4s;
+/* accent flow that fills each connector in sequence */
+.pipeline__step:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  left: 11px;
+  top: 50%;
+  height: 100%;
+  width: 2px;
+  background: var(--accent);
+  transform-origin: top;
+  transform: scaleY(0);
+  z-index: 0;
+  box-shadow: 0 0 8px rgba(94, 234, 212, 0.5);
+  animation: pipeFill 6s ease-in-out infinite;
+  animation-delay: calc(var(--i) * 0.55s + 0.3s);
 }
-.agentflow__pulse--2 {
-  animation-delay: 1.2s;
-}
-.agentflow__pulse--3 {
-  animation-delay: 2s;
-}
-.agentflow__pulse--4 {
-  animation-delay: 2.8s;
-}
-.agentflow__pulse--5 {
-  animation-delay: 3.6s;
-}
-@keyframes flowSeg {
-  0% {
-    stroke-dashoffset: 34;
-  }
-  12%,
-  100% {
-    stroke-dashoffset: 0;
-  }
-}
-.agentflow__dot {
-  fill: #0b0e14;
-  stroke: var(--fg-faint);
-  stroke-width: 1.5;
-}
-.agentflow__text {
-  fill: var(--fg-dim);
-  font-family: var(--mono);
-  font-size: 11px;
-  text-anchor: start;
-}
-.agentflow__node .agentflow__dot {
-  animation: nodeLight 6s ease-in-out infinite;
-}
-.agentflow__node .agentflow__text {
-  animation: textLight 6s ease-in-out infinite;
-}
-.agentflow__node--1 .agentflow__dot,
-.agentflow__node--1 .agentflow__text {
-  animation-delay: 0s;
-}
-.agentflow__node--2 .agentflow__dot,
-.agentflow__node--2 .agentflow__text {
-  animation-delay: 0.8s;
-}
-.agentflow__node--3 .agentflow__dot,
-.agentflow__node--3 .agentflow__text {
-  animation-delay: 1.6s;
-}
-.agentflow__node--4 .agentflow__dot,
-.agentflow__node--4 .agentflow__text {
-  animation-delay: 2.4s;
-}
-.agentflow__node--5 .agentflow__dot,
-.agentflow__node--5 .agentflow__text {
-  animation-delay: 3.2s;
-}
-.agentflow__node--6 .agentflow__dot,
-.agentflow__node--6 .agentflow__text {
-  animation-delay: 4s;
-}
-@keyframes nodeLight {
-  0%,
-  18%,
-  60%,
-  100% {
-    fill: #0b0e14;
-    stroke: var(--fg-faint);
-  }
-  30%,
-  45% {
-    fill: var(--accent);
-    stroke: var(--accent);
-  }
-}
-@keyframes textLight {
-  0%,
-  18%,
-  60%,
-  100% {
-    fill: var(--fg-dim);
-  }
-  30%,
-  45% {
-    fill: var(--accent);
-  }
-}
-
-/* ============================================================
-   SKILLS
-   ============================================================ */
-.skills__list {
+.pipeline__node {
   position: relative;
   z-index: 1;
-  margin-top: clamp(2.5rem, 6vh, 4rem);
-}
-.skills__row {
   display: grid;
-  grid-template-columns: 200px 1fr;
-  gap: 1.5rem;
-  align-items: baseline;
-  padding: 1.4rem 0;
-  border-top: 1px solid var(--border);
+  place-items: center;
+  width: 24px;
+  height: 24px;
 }
-.skills__row:last-child {
-  border-bottom: 1px solid var(--border);
+.pipeline__dot {
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: #0b0e14;
+  border: 2px solid var(--fg-faint);
+  animation: pipeDot 6s ease-in-out infinite;
+  animation-delay: calc(var(--i) * 0.55s);
 }
-.skills__cat {
+.pipeline__label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  min-width: 0;
+}
+.pipeline__en {
   display: flex;
   align-items: baseline;
-  gap: 0.7rem;
+  gap: 0.5rem;
   font-size: 0.92rem;
+  font-weight: 500;
   color: var(--fg);
+  line-height: 1.2;
 }
-.skills__no {
-  font-size: 0.7rem;
+.pipeline__no {
+  font-size: 0.62rem;
   color: var(--accent);
+  letter-spacing: 0.08em;
 }
-.skills__items {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.55rem;
+.pipeline__jp {
+  font-size: 0.72rem;
+  color: var(--fg-dim);
+  letter-spacing: 0.02em;
+  line-height: 1.3;
 }
-.skills__tag {
-  font-size: 0.8rem;
-  padding: 0.35rem 0.8rem;
-  border: 1px solid var(--border);
-  border-radius: 3px;
-  color: var(--fg);
-  background: var(--bg-soft);
-  transition: border-color 0.2s ease, color 0.2s ease;
+@keyframes pipeDot {
+  0%,
+  12%,
+  70%,
+  100% {
+    background: #0b0e14;
+    border-color: var(--fg-faint);
+    box-shadow: none;
+  }
+  22%,
+  55% {
+    background: var(--accent);
+    border-color: var(--accent);
+    box-shadow: 0 0 12px rgba(94, 234, 212, 0.75);
+  }
 }
-.skills__tag:hover {
-  border-color: var(--accent);
-  color: var(--accent);
+@keyframes pipeFill {
+  0%,
+  8% {
+    transform: scaleY(0);
+    opacity: 0.9;
+  }
+  24%,
+  70% {
+    transform: scaleY(1);
+    opacity: 0.9;
+  }
+  92%,
+  100% {
+    transform: scaleY(1);
+    opacity: 0;
+  }
 }
 
 /* ============================================================
@@ -634,7 +622,54 @@ body.is-loading {
 }
 
 /* ============================================================
-   2D FALLBACK SIM (Canvas) — used when WebGL is unavailable
+   HERO FALLBACK (no WebGL) — static cyber-yubatake backdrop
+   ============================================================ */
+.yfallback {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background:
+    radial-gradient(55% 45% at 68% 78%, rgba(47, 230, 196, 0.28), transparent 70%),
+    radial-gradient(38% 32% at 60% 62%, rgba(94, 234, 212, 0.16), transparent 72%),
+    linear-gradient(180deg, #070a0e 0%, #06080c 100%);
+}
+.yfallback__steam {
+  position: absolute;
+  bottom: 8%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(134, 255, 233, 0.18), transparent 70%);
+  filter: blur(18px);
+  animation: yfsteam 9s ease-in-out infinite;
+}
+.yfallback__steam--1 {
+  left: 56%;
+  width: 220px;
+  height: 320px;
+}
+.yfallback__steam--2 {
+  left: 70%;
+  width: 180px;
+  height: 260px;
+  animation-delay: -4s;
+}
+@keyframes yfsteam {
+  0%, 100% {
+    transform: translateY(10px) scale(1);
+    opacity: 0.5;
+  }
+  50% {
+    transform: translateY(-30px) scale(1.12);
+    opacity: 0.85;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .yfallback__steam {
+    animation: none;
+  }
+}
+
+/* ============================================================
+   2D FALLBACK SIM (Canvas) — used by the EvoWalker works card
    ============================================================ */
 .evo {
   position: absolute;
@@ -678,13 +713,8 @@ body.is-loading {
     border-bottom: 1px solid var(--rule);
     padding-bottom: 1rem;
   }
-  .panel {
-    width: 190px;
-    font-size: 0.6rem;
-  }
 }
 @media (max-width: 560px) {
-  /* stack the hero so the measurement panel flows below the buttons (no overlap) */
   .hero {
     flex-direction: column;
     align-items: stretch;
@@ -694,7 +724,10 @@ body.is-loading {
     padding-top: 6rem;
     padding-bottom: 2rem;
   }
-  .skills__row,
+  .hero__prow {
+    grid-template-columns: 2.8rem 1fr;
+    gap: 0.7rem;
+  }
   .contact__row {
     grid-template-columns: 1fr;
     gap: 0.5rem;
@@ -703,22 +736,42 @@ body.is-loading {
     flex-direction: column;
     align-items: flex-start;
   }
+  /* the 4:3 work card is short on phones — shrink the stepper so all six
+     stages fit clear of the caption */
+  .agentflow {
+    padding: 0.7rem 0.7rem 2.3rem;
+  }
+  .pipeline__step {
+    min-height: 31px;
+    grid-template-columns: 22px 1fr;
+    gap: 0.6rem;
+  }
+  .pipeline__en {
+    font-size: 0.8rem;
+  }
+  .pipeline__jp {
+    font-size: 0.64rem;
+  }
+  .pipeline__dot {
+    width: 11px;
+    height: 11px;
+  }
 }
 
 /* ============================================================
    REDUCED MOTION — freeze flows/anim, keep things legible
    ============================================================ */
 @media (prefers-reduced-motion: reduce) {
-  .agentflow__pulse,
-  .agentflow__node .agentflow__dot,
-  .agentflow__node .agentflow__text {
+  .pipeline__dot {
     animation: none;
+    border-color: var(--accent-dim);
   }
-  .agentflow__pulse {
-    stroke-dashoffset: 0;
-    opacity: 0.5;
+  .pipeline__step::after {
+    animation: none;
+    opacity: 0;
   }
-  .btn:hover {
+  .btn:hover,
+  .work__cta:hover {
     transform: none;
   }
 }

@@ -15,10 +15,10 @@ export default function About() {
           <p className="about__lead" data-reveal lang="ja">
             生成AIエージェントとリアルタイム3Dの2分野で、個人でアプリを開発しています。
             AIの内部処理や学習の過程を、人が見て理解できる形にすることに取り組んでいます。
-            作ったものは下の「Selected Works」にまとめ、コードはGitHubで公開しています。
           </p>
-          <p className="about__affil mono" data-reveal lang="ja">
-            所属: 東京電機大学大学院 システムデザイン工学研究科 デザイン工学専攻
+          <p className="about__sub" data-reveal lang="ja">
+            制作した2つのアプリを下の Selected Works にまとめました。
+            コードはすべて GitHub で公開しています。
           </p>
         </div>
       </div>

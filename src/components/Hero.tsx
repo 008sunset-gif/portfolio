@@ -1,33 +1,34 @@
 import { useEffect, useRef, useState } from 'react'
 import gsap from 'gsap'
-import Hero3DScene from '../three/Hero3DScene'
-import EvoWalkerCanvas from './EvoWalkerCanvas'
+import YubatakeScene from '../three/YubatakeScene'
+import YubatakeFallback from './YubatakeFallback'
 import Preloader from './Preloader'
 import useDeviceTier from '../hooks/useDeviceTier'
 
-// 1ページ目の自己紹介。事実を簡潔に伝える文体（ポエム調にしない）。
-const DECLARATION = [
-  '生成AIエージェントとリアルタイム3Dを使った、個人アプリ開発をしています。',
-  '制作した2つのアプリを下にまとめました。コードはGitHubで公開しています。',
+// FIG.00 = 「誰か」だけを示す。何をする人かは ABOUT(FIG.01) に書く。
+const PROFILE: { key: string; val: string }[] = [
+  { key: '所属', val: '東京電機大学大学院 システムデザイン工学研究科 デザイン工学専攻' },
+  { key: '出身', val: '群馬県草津町' },
+  { key: '専門', val: '個人アプリ開発' },
 ]
 
 export default function Hero() {
   const tier = useDeviceTier()
   const [loaded, setLoaded] = useState(false)
-  const declRef = useRef<HTMLParagraphElement>(null)
+  const profileRef = useRef<HTMLDListElement>(null)
 
-  // 宣言文を1行ずつ 0.15s 刻みでフェードイン（プリローダー解除と同時）。reduced-motion は即表示。
+  // プロフィール各行を順にフェードイン（プリローダー解除と同時）。reduced-motion は即表示。
   useEffect(() => {
     if (!loaded) return
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     if (reduce) return
-    const lines = declRef.current?.querySelectorAll('.hero__line')
-    if (!lines || lines.length === 0) return
+    const rows = profileRef.current?.querySelectorAll('.hero__prow')
+    if (!rows || rows.length === 0) return
     const ctx = gsap.context(() => {
       gsap.fromTo(
-        lines,
-        { opacity: 0, y: 22 },
-        { opacity: 1, y: 0, duration: 0.9, ease: 'power3.out', stagger: 0.15, delay: 0.1 }
+        rows,
+        { opacity: 0, y: 18 },
+        { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out', stagger: 0.12, delay: 0.1 }
       )
     })
     return () => ctx.revert()
@@ -38,30 +39,30 @@ export default function Hero() {
       <Preloader onDone={() => setLoaded(true)} />
 
       <div className="hero3d">
-        {tier.mode === '3d' ? <Hero3DScene tier={tier} /> : <EvoWalkerCanvas />}
+        {tier.mode === '3d' ? <YubatakeScene tier={tier} /> : <YubatakeFallback />}
         <div className="hero3d__scrim" aria-hidden="true" />
       </div>
 
       <div className="container hero__inner">
-        <p className="hero__eyebrow mono">FIG.00 — PROFILE / 自己紹介</p>
+        <p className="hero__eyebrow mono">FIG.00 — PROFILE / 草津 湯畑</p>
         <h1 className="hero__name mono">
           大場 祐飛 <span className="hero__name-en">/ Yuhi Oba</span>
         </h1>
-        <p className="hero__affil mono" lang="ja">
-          東京電機大学大学院 システムデザイン工学研究科 デザイン工学専攻
-        </p>
 
-        <p className="hero__declaration" lang="ja" ref={declRef}>
-          {DECLARATION.map((line) => (
-            <span className="hero__line" key={line}>
-              {line}
-            </span>
+        <dl className="hero__profile mono" ref={profileRef}>
+          {PROFILE.map((row) => (
+            <div className="hero__prow" key={row.key}>
+              <dt className="hero__pkey">{row.key}</dt>
+              <dd className="hero__pval" lang="ja">
+                {row.val}
+              </dd>
+            </div>
           ))}
-        </p>
+        </dl>
 
         <div className="hero__actions">
           <a className="btn btn--primary" href="#works">
-            View Works <span aria-hidden="true">↓</span>
+            作品を見る <span aria-hidden="true">↓</span>
           </a>
           <a
             className="btn btn--ghost mono"
@@ -69,7 +70,7 @@ export default function Hero() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            GitHub ↗
+            GitHub <span aria-hidden="true">↗</span>
           </a>
         </div>
       </div>

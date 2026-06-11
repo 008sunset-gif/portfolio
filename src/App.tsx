@@ -3,7 +3,6 @@ import useReveal from './hooks/useReveal'
 import Hero from './components/Hero'
 import About from './components/About'
 import Works from './components/Works'
-import Skills from './components/Skills'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
 import './app.css'
@@ -21,7 +20,6 @@ export default function App() {
       <main>
         <About />
         <Works />
-        <Skills />
         <Contact />
       </main>
       <Footer />

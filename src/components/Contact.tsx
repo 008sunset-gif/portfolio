@@ -2,11 +2,11 @@ export default function Contact() {
   return (
     <section className="section contact" id="contact">
       <span className="section__index" aria-hidden="true">
-        04
+        03
       </span>
       <div className="container">
         <p className="fig" data-reveal>
-          FIG.04 <span className="fig__name">/ Contact</span>
+          FIG.03 <span className="fig__name">/ Contact</span>
         </p>
         <dl className="contact__list" data-reveal-group>
           <div className="contact__row" data-reveal>
