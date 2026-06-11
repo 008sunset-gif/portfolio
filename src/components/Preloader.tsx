@@ -4,7 +4,7 @@ import gsap from 'gsap'
 /**
  * Instrument-style boot sequence: the ring/logo draws in, the name resolves and
  * a 00→100 counter runs, then the panel lifts to reveal the hero — matching the
- * "観察装置を起動する" framing. Respects reduced motion (snaps through quickly).
+ * A brief loading sequence before the hero reveals. Respects reduced motion (snaps through quickly).
  */
 export default function Preloader({ onDone }: { onDone: () => void }) {
   const root = useRef<HTMLDivElement>(null)
@@ -68,7 +68,7 @@ export default function Preloader({ onDone }: { onDone: () => void }) {
         <div className="preloader__meta mono">
           <span className="preloader__name">大場 祐飛 / Yuhi Oba</span>
           <span className="preloader__count">{String(count).padStart(3, '0')}</span>
-          <span className="preloader__label">INITIALIZING OBSERVATION UNIT</span>
+          <span className="preloader__label">LOADING PORTFOLIO</span>
         </div>
       </div>
     </div>

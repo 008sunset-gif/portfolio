@@ -4,9 +4,9 @@ const SKILLS: { label: string; items: string[] }[] = [
   { label: 'フロント/3D', items: ['React', 'React Three Fiber', 'Three.js', 'Vite'] },
   {
     label: 'AI/エージェント',
-    items: ['LangGraph', 'LangChain', 'Gemini', 'Tavily', 'Pydantic', 'RAG', 'マルチエージェント設計'],
+    items: ['Gemini', 'LangChain', 'Pydantic', 'RAG', 'マルチエージェント設計'],
   },
-  { label: 'その他', items: ['Streamlit', '遺伝的アルゴリズム', 'Git/GitHub'] },
+  { label: 'その他', items: ['arXiv / Semantic Scholar API', 'pytest', '遺伝的アルゴリズム', 'Git/GitHub'] },
 ]
 
 export default function Skills() {

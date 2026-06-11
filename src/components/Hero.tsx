@@ -6,12 +6,10 @@ import MeasurementPanel from './MeasurementPanel'
 import Preloader from './Preloader'
 import useDeviceTier from '../hooks/useDeviceTier'
 
-// 改行位置を含め、宣言文は原文のまま使用する。
+// ヒーローの一言。詩ではなく「何をする人か」を一目で伝える短いコピー。
 const DECLARATION = [
-  '試行錯誤は、見えないだけで、いつも起きている。',
-  'AIの中で。設計者の頭の中で。',
-  '私はそれを、観察できる形に、再利用できる形にしたい。',
-  'だから今日も、動くものを作る。',
+  '生成AIエージェントとリアルタイム3Dの、個人アプリ開発者です。',
+  'AIや設計の「試行錯誤」を、目に見える形にするのが好きです。',
 ]
 
 export default function Hero() {
@@ -46,7 +44,7 @@ export default function Hero() {
       </div>
 
       <div className="container hero__inner">
-        <p className="hero__eyebrow mono">FIG.00 — OBSERVATION UNIT / 観察装置</p>
+        <p className="hero__eyebrow mono">FIG.00 — PROFILE / AI × 3D 開発</p>
         <h1 className="hero__name mono">
           大場 祐飛 <span className="hero__name-en">/ Yuhi Oba</span>
         </h1>

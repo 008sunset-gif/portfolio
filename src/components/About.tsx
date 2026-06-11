@@ -9,7 +9,6 @@ export default function About() {
           <p className="fig">
             FIG.01 <span className="fig__name">/ About</span>
           </p>
-          <span className="about__coord mono">N35.69 · E139.70</span>
         </div>
 
         <div className="about__body" data-reveal-group>
@@ -19,7 +18,7 @@ export default function About() {
             人が直感的に観察でき、再利用できる形に落とすこと」。
           </p>
           <p className="about__affil mono" data-reveal lang="ja">
-            所属: 【要記入: 例)東京電機大学大学院 システムデザイン工学研究科 M1】
+            所属: 東京電機大学大学院 システムデザイン工学研究科 デザイン工学専攻
           </p>
         </div>
       </div>

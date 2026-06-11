@@ -260,11 +260,6 @@ body.is-loading {
   border-left: 1px solid var(--rule);
   padding-left: 1.4rem;
 }
-.about__coord {
-  font-size: 0.68rem;
-  letter-spacing: 0.1em;
-  color: var(--fg-faint);
-}
 .about__lead {
   font-size: clamp(1.1rem, 2vw, 1.5rem);
   line-height: 2.05;
@@ -442,7 +437,8 @@ body.is-loading {
 }
 
 /* ============================================================
-   AGENT FLOW (DeepDive node graph) — Planner -> Researcher -> Writer
+   AGENT FLOW (Paper Survey pipeline) — Planner -> Collector ->
+   Evaluator -> Synthesizer -> Verifier -> Reporter
    ============================================================ */
 .agentflow {
   position: absolute;
@@ -454,7 +450,7 @@ body.is-loading {
 }
 .agentflow__svg {
   width: 100%;
-  max-width: 340px;
+  max-width: 210px;
   height: auto;
   overflow: visible;
 }
@@ -465,22 +461,30 @@ body.is-loading {
 .agentflow__pulse {
   stroke: var(--accent);
   stroke-width: 2;
-  stroke-dasharray: 120;
-  stroke-dashoffset: 120;
+  stroke-dasharray: 34;
+  stroke-dashoffset: 34;
+  animation: flowSeg 6s linear infinite;
 }
 .agentflow__pulse--1 {
-  animation: flowSeg 4.5s linear infinite;
-  animation-delay: 0.6s;
+  animation-delay: 0.4s;
 }
 .agentflow__pulse--2 {
-  animation: flowSeg 4.5s linear infinite;
-  animation-delay: 2.1s;
+  animation-delay: 1.2s;
+}
+.agentflow__pulse--3 {
+  animation-delay: 2s;
+}
+.agentflow__pulse--4 {
+  animation-delay: 2.8s;
+}
+.agentflow__pulse--5 {
+  animation-delay: 3.6s;
 }
 @keyframes flowSeg {
   0% {
-    stroke-dashoffset: 120;
+    stroke-dashoffset: 34;
   }
-  20%,
+  12%,
   100% {
     stroke-dashoffset: 0;
   }
@@ -494,31 +498,37 @@ body.is-loading {
   fill: var(--fg-dim);
   font-family: var(--mono);
   font-size: 11px;
-  text-anchor: middle;
+  text-anchor: start;
 }
 .agentflow__node .agentflow__dot {
-  animation: nodeLight 4.5s ease-in-out infinite;
-}
-.agentflow__node--1 .agentflow__dot {
-  animation-delay: 0s;
-}
-.agentflow__node--2 .agentflow__dot {
-  animation-delay: 1.5s;
-}
-.agentflow__node--3 .agentflow__dot {
-  animation-delay: 3s;
+  animation: nodeLight 6s ease-in-out infinite;
 }
 .agentflow__node .agentflow__text {
-  animation: textLight 4.5s ease-in-out infinite;
+  animation: textLight 6s ease-in-out infinite;
 }
+.agentflow__node--1 .agentflow__dot,
 .agentflow__node--1 .agentflow__text {
   animation-delay: 0s;
 }
+.agentflow__node--2 .agentflow__dot,
 .agentflow__node--2 .agentflow__text {
-  animation-delay: 1.5s;
+  animation-delay: 0.8s;
 }
+.agentflow__node--3 .agentflow__dot,
 .agentflow__node--3 .agentflow__text {
-  animation-delay: 3s;
+  animation-delay: 1.6s;
+}
+.agentflow__node--4 .agentflow__dot,
+.agentflow__node--4 .agentflow__text {
+  animation-delay: 2.4s;
+}
+.agentflow__node--5 .agentflow__dot,
+.agentflow__node--5 .agentflow__text {
+  animation-delay: 3.2s;
+}
+.agentflow__node--6 .agentflow__dot,
+.agentflow__node--6 .agentflow__text {
+  animation-delay: 4s;
 }
 @keyframes nodeLight {
   0%,

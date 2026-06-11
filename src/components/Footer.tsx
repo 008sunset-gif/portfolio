@@ -4,7 +4,7 @@ export default function Footer() {
       <div className="container footer__inner">
         <div className="footer__mark mono">
           <span className="footer__dot" />
-          EVO·WALKER OBSERVATION UNIT
+          YUHI OBA / PORTFOLIO
         </div>
         <div className="footer__meta mono">
           <span className="footer__build">Built with Claude Code</span>

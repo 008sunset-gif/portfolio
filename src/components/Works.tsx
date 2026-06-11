@@ -16,16 +16,23 @@ const EVOWALKER: Work = {
   code: 'https://github.com/008sunset-gif/evowalker-ai',
 }
 
-const DEEPDIVE: Work = {
+const PAPER_SURVEY: Work = {
   index: '02',
-  title: 'DeepDive',
-  oneLiner: '4つのAIエージェントが自律調査するマルチエージェント型リサーチエージェント',
+  title: 'Paper Survey Agent',
+  oneLiner: 'LLMの出典捏造を機械的・意味的に検証する論文サーベイエージェント',
   description:
-    '質問を入力すると Planner→Researcher→Writer が連携し、Web検索と統合を繰り返して引用付きMarkdownレポートを自動生成。Pydanticで全出力を型保証し、ハルシネーション対策とローカル完結を重視。',
+    'LLMが論文調査で出典を捏造する問題に対し、各主張に論文IDを紐付け、arXiv・Semantic Scholar から取得した実際の論文内容と矛盾しないかを検証する。裏が取れない主張も消さず、検証ステータス付きで残す。6つの部品（Planner→Collector→Evaluator→Synthesizer→Verifier→Reporter）で構成し、テスト79本・実API非依存のモック設計。',
   voice:
-    '「すべての主張に出典を付けるのは、AIの出力を『信じる』ではなく『検証できる』ものにしたいからだ。」',
-  tech: ['Python 3.12', 'LangGraph', 'LangChain', 'Gemini', 'Tavily', 'Pydantic', 'Streamlit'],
-  code: 'https://github.com/008sunset-gif/deepdive',
+    '「すべての主張に出典を付けるのは、AIの出力を『信じる』のではなく『検証できる』ものにしたいからだ。」',
+  tech: [
+    'Python 3.14',
+    'Gemini (langchain-google-genai)',
+    'arXiv API',
+    'Semantic Scholar API',
+    'Pydantic v2',
+    'pytest',
+  ],
+  code: 'https://github.com/008sunset-gif/paper-survey-agent',
 }
 
 export default function Works() {
@@ -46,7 +53,7 @@ export default function Works() {
             mediaCaption="FIG.02·A — LIVE SIMULATION / 同一エンジン"
           />
           <WorkRow
-            work={DEEPDIVE}
+            work={PAPER_SURVEY}
             media={<AgentFlow />}
             mediaCaption="FIG.02·B — AGENT PIPELINE"
             reverse
