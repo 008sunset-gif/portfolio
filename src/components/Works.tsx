@@ -39,7 +39,7 @@ export default function Works() {
       </span>
       <div className="container">
         <p className="fig works__fig" data-reveal>
-          FIG.02 <span className="fig__name">/ Selected Works</span>
+          FIG.02 <span className="fig__name">/ 制作したアプリ</span>
         </p>
 
         <div className="works__list">
