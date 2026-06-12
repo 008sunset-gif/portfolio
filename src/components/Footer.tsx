@@ -7,7 +7,6 @@ export default function Footer() {
           YUHI OBA / PORTFOLIO
         </div>
         <div className="footer__meta mono">
-          <span className="footer__build">Built with Claude Code</span>
           <span className="footer__copy">© 2026 Yuhi Oba</span>
         </div>
       </div>

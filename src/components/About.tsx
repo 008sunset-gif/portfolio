@@ -13,7 +13,7 @@ export default function About() {
 
         <div className="about__body" data-reveal-group>
           <p className="about__lead" data-reveal lang="ja">
-            生成AIエージェントとリアルタイム3Dの2分野で、個人でアプリを開発しています。
+            生成AIエージェントと、リアルタイム3Dを使ったアプリを個人で開発しています。
           </p>
           <p className="about__sub" data-reveal lang="ja">
             制作した2つのアプリは下にまとめました。コードはすべて GitHub で公開しています。
