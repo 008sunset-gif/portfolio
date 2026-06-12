@@ -548,6 +548,211 @@ body.is-loading {
 }
 
 /* ============================================================
+   BOARDROOM — AI Boardroom as a miniature of its discussion screen:
+   a short stack of avatar + role + stance + utterance cards that the
+   directors fill in first and the CEO chair closes. Same tokens/tone
+   as the cards above (single teal accent, mono + JP type, --bg-soft
+   surfaces), the cards just fade up in sequence like a meeting building.
+   ============================================================ */
+.boardroom {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* extra bottom padding keeps the last card clear of the caption */
+  padding: 0.9rem 1rem 2.2rem;
+}
+.meeting {
+  list-style: none;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.meeting__msg {
+  display: grid;
+  grid-template-columns: 26px 1fr;
+  gap: 0.6rem;
+  align-items: start;
+  padding: 0.45rem 0.6rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--bg-soft);
+  /* the meeting runs as one continuous, phase-locked loop: each card slides up
+     in turn (delay = its slot), a teal spotlight flares as it "speaks" then
+     settles, all cards hold visible together, then the wave clears and repeats.
+     One shared 9s timeline + per-slot delay keeps the whole stack in step. */
+  opacity: 1;
+  animation: meetCard 9s var(--ease) infinite;
+  animation-delay: calc(var(--i) * 1s);
+}
+/* the moving spotlight is a box-shadow only, so each card's resting border —
+   including the CEO chair's accent frame — is never disturbed */
+@keyframes meetCard {
+  0% {
+    opacity: 0;
+    transform: translateY(8px);
+    box-shadow: none;
+  }
+  6% {
+    opacity: 1;
+    transform: translateY(0);
+    box-shadow: 0 0 0 1px var(--accent), 0 0 14px rgba(94, 234, 212, 0.35);
+  }
+  16%,
+  86% {
+    opacity: 1;
+    transform: translateY(0);
+    box-shadow: 0 0 0 0 transparent;
+  }
+  94%,
+  100% {
+    opacity: 0;
+    transform: translateY(8px);
+    box-shadow: none;
+  }
+}
+/* avatar — role identity within the teal/grey range; the CEO chair is filled */
+.meeting__avatar {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 0.56rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  border: 1.5px solid var(--role, var(--fg-dim));
+  color: var(--role, var(--fg-dim));
+  background: var(--bg);
+}
+.meeting__msg[data-abbr='CFO'] {
+  --role: var(--fg-dim);
+}
+.meeting__msg[data-abbr='CMO'] {
+  --role: var(--accent);
+}
+.meeting__msg[data-abbr='COO'] {
+  --role: var(--fg);
+}
+.meeting__msg[data-abbr='CEO'] {
+  --role: var(--accent);
+}
+.meeting__body {
+  min-width: 0;
+}
+.meeting__head {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-bottom: 0.22rem;
+}
+.meeting__abbr {
+  font-size: 0.66rem;
+  font-weight: 600;
+  color: var(--fg);
+  letter-spacing: 0.02em;
+}
+.meeting__role {
+  font-size: 0.58rem;
+  color: var(--fg-faint);
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+/* stance badge — colour stays inside the teal gradation + grey */
+.meeting__badge {
+  margin-left: auto;
+  flex: none;
+  font-size: 0.56rem;
+  line-height: 1;
+  padding: 0.2rem 0.42rem;
+  border-radius: 999px;
+  border: 1px solid var(--badge-bd, var(--border));
+  background: var(--badge-bg, transparent);
+  color: var(--badge, var(--fg-dim));
+}
+.is-for {
+  --badge: var(--accent);
+  --badge-bd: rgba(94, 234, 212, 0.4);
+  --badge-bg: rgba(94, 234, 212, 0.08);
+}
+.is-conditional {
+  --badge: rgba(94, 234, 212, 0.9);
+  --badge-bd: rgba(94, 234, 212, 0.28);
+  --badge-bg: rgba(94, 234, 212, 0.05);
+}
+.is-against {
+  --badge: var(--fg-dim);
+  --badge-bd: var(--border);
+  --badge-bg: rgba(255, 255, 255, 0.03);
+}
+.meeting__say {
+  font-size: 0.66rem;
+  line-height: 1.5;
+  color: var(--fg-dim);
+}
+/* labelled divider that sets the chair's summary apart */
+.meeting__divider {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0 0.1rem;
+  /* same loop as the cards, but no spotlight — it just slides in on its slot */
+  opacity: 1;
+  animation: meetDivider 9s var(--ease) infinite;
+  animation-delay: calc(var(--i) * 1s);
+}
+@keyframes meetDivider {
+  0% {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  6%,
+  86% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  94%,
+  100% {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
+.meeting__divider::before,
+.meeting__divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+.meeting__divider span {
+  font-size: 0.54rem;
+  letter-spacing: 0.14em;
+  color: var(--fg-faint);
+}
+/* the CEO chair card — emphasised so the summary reads as the close */
+.meeting__msg--chair {
+  border-color: var(--accent-dim);
+  background: rgba(94, 234, 212, 0.05);
+}
+.meeting__msg--chair .meeting__avatar {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #06281f;
+}
+.meeting__msg--chair .meeting__badge {
+  --badge: #06281f;
+  --badge-bd: var(--accent);
+  --badge-bg: var(--accent);
+}
+.meeting__msg--chair .meeting__say {
+  color: var(--fg);
+}
+
+/* ============================================================
    CONTACT
    ============================================================ */
 .contact__list {
@@ -756,6 +961,30 @@ body.is-loading {
     width: 11px;
     height: 11px;
   }
+  /* tighten the boardroom cards so all four stay clear of the caption */
+  .boardroom {
+    padding: 0.6rem 0.7rem 2.3rem;
+  }
+  .meeting {
+    gap: 0.4rem;
+  }
+  .meeting__msg {
+    grid-template-columns: 23px 1fr;
+    gap: 0.5rem;
+    padding: 0.4rem 0.5rem;
+  }
+  .meeting__avatar {
+    width: 23px;
+    height: 23px;
+    font-size: 0.5rem;
+  }
+  .meeting__abbr {
+    font-size: 0.62rem;
+  }
+  .meeting__say {
+    font-size: 0.6rem;
+    line-height: 1.45;
+  }
 }
 
 /* ============================================================
@@ -769,6 +998,14 @@ body.is-loading {
   .pipeline__step::after {
     animation: none;
     opacity: 0;
+  }
+  /* boardroom cards rest fully shown — the conversation stays readable
+     without the fade-up */
+  .meeting__msg,
+  .meeting__divider {
+    animation: none;
+    opacity: 1;
+    transform: none;
   }
   .btn:hover,
   .work__cta:hover {
