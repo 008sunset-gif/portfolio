@@ -42,6 +42,15 @@ body {
   position: relative;
 }
 
+/* Break Japanese text at natural phrase (文節) boundaries instead of mid-word.
+   Falls back to `normal` in browsers that don't support auto-phrase yet, so it
+   only ever improves wrapping. `:not(a)` keeps the contact link's break-all
+   (long URLs) intact. */
+:lang(ja):not(a) {
+  word-break: auto-phrase;
+  line-break: strict;
+}
+
 /* page-wide faint measurement grid (the whole site is the EvoWalker world) */
 body::before {
   content: '';
