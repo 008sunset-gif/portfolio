@@ -16,7 +16,7 @@ export default function About() {
             生成AIエージェントと、リアルタイム3Dを使ったアプリを個人で開発しています。
           </p>
           <p className="about__sub" data-reveal lang="ja">
-            制作した2つのアプリは下にまとめました。コードはすべて GitHub で公開しています。
+            制作した3つのアプリは下にまとめました。コードはすべて GitHub で公開しています。
           </p>
         </div>
       </div>

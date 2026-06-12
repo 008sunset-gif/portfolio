@@ -1,6 +1,7 @@
 import WorkRow, { type Work } from './WorkRow'
 import EvoWalkerMini from './EvoWalkerMini'
 import AgentFlow from './AgentFlow'
+import BoardroomFlow from './BoardroomFlow'
 
 // 文言はすべて原文のまま。技術スタックのみ表示用にタグ分割している。
 const EVOWALKER: Work = {
@@ -31,6 +32,17 @@ const PAPER_SURVEY: Work = {
   code: 'https://github.com/008sunset-gif/paper-survey-agent',
 }
 
+const AI_BOARDROOM: Work = {
+  index: '03',
+  title: 'AI Boardroom',
+  oneLiner: '役職の異なるAIが議論し、意思決定の論点とリスクを整理する経営会議',
+  description:
+    '経営課題を入力すると、役職ごとに異なる視点を持つAIが初期意見・反論・再反論の2巡で議論し、議長AIが論点とリスクを構造化する。議論の前にAIが判断に必要な情報を逆質問するため、一般論でなくその状況に即した議論になる。AIは結論を出さず、人が判断するための材料を整理することに徹している。',
+  tech: ['React 18', 'TypeScript', 'Vite', 'Gemini (gemini-2.5-flash-lite)'],
+  live: 'https://ai-boardroom-beta.vercel.app',
+  code: 'https://github.com/008sunset-gif/ai-boardroom',
+}
+
 export default function Works() {
   return (
     <section className="section works" id="works">
@@ -53,6 +65,11 @@ export default function Works() {
             media={<AgentFlow />}
             mediaCaption="FIG.02·B — AGENT PIPELINE"
             reverse
+          />
+          <WorkRow
+            work={AI_BOARDROOM}
+            media={<BoardroomFlow />}
+            mediaCaption="FIG.02·C — DISCUSSION FLOW"
           />
         </div>
       </div>
