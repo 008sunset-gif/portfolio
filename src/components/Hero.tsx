@@ -9,7 +9,6 @@ import useDeviceTier from '../hooks/useDeviceTier'
 const PROFILE: { key: string; val: string }[] = [
   { key: '所属', val: '東京電機大学大学院 システムデザイン工学研究科 デザイン工学専攻' },
   { key: '出身', val: '群馬県草津町' },
-  { key: '専門', val: '個人アプリ開発' },
 ]
 
 export default function Hero() {
@@ -44,7 +43,7 @@ export default function Hero() {
       </div>
 
       <div className="container hero__inner">
-        <p className="hero__eyebrow mono">FIG.00 — PROFILE / 草津 湯畑</p>
+        <p className="hero__eyebrow mono">FIG.00 — PROFILE</p>
         <h1 className="hero__name mono">
           大場 祐飛 <span className="hero__name-en">/ Yuhi Oba</span>
         </h1>
