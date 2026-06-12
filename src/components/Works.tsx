@@ -8,7 +8,7 @@ const EVOWALKER: Work = {
   title: 'EvoWalker AI',
   oneLiner: '遺伝的アルゴリズムで二足歩行を自律学習する3D進化シミュレーター',
   description:
-    'AIロボット個体群が世代交代を繰り返し、ふらつき・転倒を克服してまっすぐ歩けるよう進化する過程を3DとSVGグラフで観察できるWebアプリ。12個の遺伝子パラメータ＋エリート選抜＋突然変異の遺伝的アルゴリズムを、外部物理エンジンを使わず自作した。',
+    'AIロボットの個体群が世代交代を繰り返し、ふらつきや転倒を乗り越えてまっすぐ歩けるよう進化していく様子を、3Dとグラフでリアルタイムに観察できるWebアプリ。12個の遺伝子・エリート選抜・突然変異による遺伝的アルゴリズムに加え、歩行の物理（重力・接地・バランス）も外部の物理エンジンに頼らず自作している。',
   tech: ['React 19', 'React Three Fiber', 'Three.js', 'TypeScript', 'Vite'],
   live: 'https://evowalker-ai.vercel.app',
   code: 'https://github.com/008sunset-gif/evowalker-ai',
@@ -19,7 +19,7 @@ const PAPER_SURVEY: Work = {
   title: 'Paper Survey Agent',
   oneLiner: 'LLMの出典捏造を機械的・意味的に検証する論文サーベイエージェント',
   description:
-    'LLMが論文調査で出典を捏造する問題に対し、各主張に論文IDを紐付け、arXiv・Semantic Scholar から取得した実際の論文内容と矛盾しないかを検証するCLIツール。裏が取れない主張も消さず、検証ステータス付きで残す。6つの部品で処理を分担し、テストは79本。実APIに依存しないモック設計にした。',
+    'AIが付けた出典が本当に正しいかを、論文の実際の内容と照合して機械的・意味的にチェックするツール。裏が取れなかった主張も勝手に消さず、「未検証」などのステータスを付けたまま残すので、どこまで信頼できるかが分かる。出典の取得には arXiv と Semantic Scholar を使用。テストは79本あり、外部APIに接続しなくても動作確認できる設計にしている。',
   tech: [
     'Python 3.14',
     'Gemini (langchain-google-genai)',
